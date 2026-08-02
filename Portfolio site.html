@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinchana A C — Full-Stack Engineer</title>
+<meta name="description" content="Sinchana A C, full-stack engineer who builds websites, apps, and AI-powered features.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0D10;
+    --bg-raised: #101318;
+    --line: #23272e;
+    --text: #E9EAEC;
+    --text-dim: #9AA0A8;
+    --ui: #7C9CFF;
+    --svc: #5EEAD4;
+    --ai: #E3A857;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --content-max: 900px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--ai);color:#0B0D10;}
+  a{color:inherit;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    display:inline-flex;align-items:center;gap:0.5rem;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--svc);box-shadow:0 0 8px var(--svc);flex:none;}
+
+  /* ---------- NAV: right rail on desktop, top bar on mobile ---------- */
+  nav.rail{
+    position:fixed;top:0;right:0;height:100%;width:170px;
+    padding:2.4rem 1.7rem;display:flex;flex-direction:column;gap:1.25rem;
+    z-index:50;border-left:1px solid var(--line);
+    background:rgba(11,13,16,0.7);backdrop-filter:blur(8px);
+  }
+  nav.rail a{
+    font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);
+    text-decoration:none;display:flex;align-items:center;gap:0.55rem;
+    transition:color .2s ease;
+  }
+  nav.rail a::before{content:'';width:14px;height:1px;background:var(--text-dim);transition:all .2s ease;flex:none;}
+  nav.rail a:hover{color:var(--text);}
+  nav.rail a:hover::before{background:var(--svc);width:22px;}
+  nav.rail a.active{color:var(--ai);}
+  nav.rail a.active::before{background:var(--ai);width:22px;}
+
+  @media (max-width:900px){
+    nav.rail{
+      position:sticky;top:0;left:0;right:0;width:100%;height:auto;
+      flex-direction:row;justify-content:flex-start;
+      padding:0.85rem 1.1rem;
+      gap:1.3rem;
+      border-left:none;border-bottom:1px solid var(--line);
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    nav.rail::-webkit-scrollbar{display:none;}
+    nav.rail a{white-space:nowrap;flex:none;}
+    nav.rail a::before{display:none;}
+    nav.rail a.active{color:var(--ai);}
+  }
+
+  main{margin-right:170px;}
+  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 6vw;}
+  @media (max-width:900px){main{margin-right:0;}}
+  @media (min-width:1400px){.wrap{padding:0;}}
+
+  section{padding:6.5rem 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  @media (max-width:600px){section{padding:4rem 0;}}
+
+  /* ---------- HERO ---------- */
+  .hero-inner{padding-top:2rem;}
+  @media (max-width:600px){.hero-inner{padding-top:0.5rem;}}
+  h1.hero-name{
+    font-family:var(--mono);font-weight:700;
+    font-size:clamp(2.2rem,6vw,4rem);line-height:1.08;letter-spacing:-0.01em;
+    margin-top:1.2rem;
+  }
+  .hero-role{
+    font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-dim);
+    margin-top:1rem;max-width:560px;
+  }
+  .hero-role strong{color:var(--text);font-weight:600;}
+
+  .bring{margin-top:2.6rem;}
+  .bring-title{
+    font-family:var(--mono);font-weight:600;
+    font-size:0.85rem;color:var(--text);
+    margin-bottom:0.9rem;
+  }
+  .bring-list{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+  .bring-list li{
+    font-size:0.9rem;color:var(--text-dim);
+    padding-left:1.1rem;position:relative;
+  }
+  .bring-list li::before{
+    content:'';
+    position:absolute;left:0;top:0.5em;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--svc);
+  }
+
+  .hero-links{margin-top:2.2rem;display:flex;gap:1.4rem;flex-wrap:wrap;font-family:var(--mono);font-size:0.8rem;}
+  .hero-links a{text-decoration:none;color:var(--text-dim);border-bottom:1px solid var(--line);padding-bottom:2px;transition:all .2s ease;}
+  .hero-links a:hover{color:var(--svc);border-color:var(--svc);}
+
+  .section-head{margin-bottom:2.4rem;}
+  .section-head h2{font-family:var(--mono);font-size:clamp(1.35rem,3vw,1.8rem);margin-top:0.65rem;font-weight:600;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3.2rem;align-items:start;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;gap:2rem;}}
+  .about-text p{margin-bottom:1rem;color:var(--text-dim);font-size:0.97rem;}
+  .about-text strong{color:var(--text);font-weight:600;}
+  .edu-card{border:1px solid var(--line);background:var(--bg-raised);padding:1.15rem 1.3rem;border-radius:6px;margin-bottom:0.85rem;}
+  .edu-card .school{font-family:var(--mono);font-size:0.85rem;color:var(--ui);}
+  .edu-card .deg{margin-top:0.35rem;font-size:0.87rem;}
+  .edu-card .yrs{margin-top:0.4rem;font-size:0.75rem;color:var(--text-dim);font-family:var(--mono);}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{position:relative;padding-left:1.8rem;border-left:1px solid var(--line);}
+  @media (max-width:500px){.timeline{padding-left:1.3rem;}}
+  .tl-item{position:relative;margin-bottom:2.6rem;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{content:'';position:absolute;left:-2.05rem;top:0.35rem;width:9px;height:9px;border-radius:50%;background:var(--svc);box-shadow:0 0 0 4px var(--bg),0 0 10px var(--svc);}
+  @media (max-width:500px){.tl-item::before{left:-1.55rem;}}
+  .tl-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.4rem;align-items:baseline;}
+  .tl-role{font-weight:600;font-size:1rem;}
+  .tl-org{color:var(--svc);font-family:var(--mono);font-size:0.8rem;}
+  .tl-date{font-family:var(--mono);font-size:0.73rem;color:var(--text-dim);white-space:nowrap;}
+  .tl-item ul{margin-top:0.8rem;padding-left:1.05rem;color:var(--text-dim);font-size:0.9rem;}
+  .tl-item li{margin-bottom:0.5rem;}
+  .tl-item li strong{color:var(--text);font-weight:600;}
+
+  /* ---------- SKILLS ---------- */
+  .layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+  .layer{border:1px solid var(--line);background:var(--bg-raised);padding:1.25rem;border-radius:6px;}
+  .layer .layer-tag{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);}
+  .layer h3{font-family:var(--mono);font-size:0.9rem;margin-top:0.4rem;margin-bottom:0.8rem;font-weight:600;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .chip{font-family:var(--mono);font-size:0.72rem;padding:0.32rem 0.55rem;border:1px solid var(--line);border-radius:4px;color:var(--text-dim);}
+  .layer:hover{border-color:var(--ui);}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+  @media (max-width:900px){.proj-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{border:1px solid var(--line);background:var(--bg-raised);padding:1.3rem;border-radius:6px;display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease;}
+  .proj-card:hover{border-color:var(--ai);transform:translateY(-3px);}
+  .proj-card .proj-stack{font-family:var(--mono);font-size:0.7rem;color:var(--ai);letter-spacing:0.03em;}
+  .proj-card h3{margin-top:0.5rem;font-size:0.96rem;font-weight:600;}
+  .proj-card p{margin-top:0.6rem;font-size:0.84rem;color:var(--text-dim);flex-grow:1;}
+
+  /* ---------- RECOGNITIONS ---------- */
+  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
+  @media (max-width:600px){.rec-grid{grid-template-columns:1fr;}}
+  .rec-card{border:1px solid var(--line);background:var(--bg-raised);padding:1.25rem 1.35rem;border-radius:6px;}
+  .rec-card .rec-tag{font-family:var(--mono);font-size:0.72rem;color:var(--ai);letter-spacing:0.05em;text-transform:uppercase;}
+  .rec-card p{margin-top:0.6rem;font-size:0.87rem;color:var(--text-dim);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:5rem 0 3.5rem;}
+  @media (max-width:600px){footer{padding:3.5rem 0 3rem;}}
+  footer h2{font-family:var(--mono);font-size:clamp(1.4rem,4vw,2.1rem);max-width:560px;font-weight:600;}
+  footer .contact-list{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:0.7rem;max-width:420px;}
+  footer .contact-list li{display:flex;align-items:center;gap:1rem;}
+  footer .contact-value{
+    font-family:var(--mono);font-size:0.9rem;
+    text-decoration:none;color:var(--text-dim);
+    transition:color .2s ease;
+  }
+  footer .contact-list li:hover .contact-value{color:var(--text);}
+  footer .icon-btn{
+    width:46px;height:46px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:8px;
+    color:var(--text-dim);
+    background:var(--bg-raised);
+    transition:all .2s ease;
+  }
+  footer .icon-btn svg{width:20px;height:20px;}
+  footer .icon-btn.icon-email{color:#EA4335;}
+  footer .icon-btn.icon-call{color:#2FB344;}
+  footer .icon-btn.icon-whatsapp{color:#25D366;}
+  footer .icon-btn.icon-github{color:#C9CBCE;}
+  footer .icon-btn.icon-linkedin{color:#3B9EF5;}
+  footer .icon-btn:hover{color:var(--bg);background:var(--svc);border-color:var(--svc);}
+  footer .icon-btn.icon-email:hover{background:#EA4335;border-color:#EA4335;color:#fff;}
+  footer .icon-btn.icon-call:hover{background:#2FB344;border-color:#2FB344;color:#fff;}
+  footer .icon-btn.icon-whatsapp:hover{background:#25D366;border-color:#25D366;color:#fff;}
+  footer .icon-btn.icon-github:hover{background:#f0f0f0;border-color:#f0f0f0;color:#181717;}
+  footer .icon-btn.icon-linkedin:hover{background:#0A66C2;border-color:#0A66C2;color:#fff;}
+  footer .fine{margin-top:2.6rem;font-size:0.72rem;color:var(--text-dim);font-family:var(--mono);}
+
+  /* ---------- TOUCH TARGETS / ACCESSIBILITY ---------- */
+  a:focus-visible{outline:2px solid var(--ai);outline-offset:3px;}
+  @media (hover:none){
+    .proj-card:hover{transform:none;}
+  }
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav class="rail" id="rail">
+  <a href="#hero" data-target="hero">Home</a>
+  <a href="#about" data-target="about">About</a>
+  <a href="#experience" data-target="experience">Work</a>
+  <a href="#skills" data-target="skills">Skills</a>
+  <a href="#projects" data-target="projects">Projects</a>
+  <a href="#recognitions" data-target="recognitions">Awards</a>
+  <a href="#contact" data-target="contact">Contact</a>
+</nav>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Full-stack developer</div>
+      <h1 class="hero-name">Sinchana A C</h1>
+      <p class="hero-role">I build complete software solutions. From understanding the problem and designing the system to development, cloud, and AI, I enjoy working across the entire journey. I'm a quick learner who enjoys exploring new technologies and turning ideas into practical solutions.</p>
+
+      <div class="bring">
+        <div class="bring-title">What I Bring</div>
+        <ul class="bring-list">
+          <li>Problem Discovery</li>
+          <li>Architecture Design</li>
+          <li>Frontend Engineering</li>
+          <li>Backend Engineering</li>
+          <li>Cloud &amp; DevOps</li>
+          <li>AI/ML Solutions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Who I am</div>
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I have <strong>3 years</strong> of experience as a full-stack engineer at A.P. Moller Maersk. I work on the frontend, the backend, and now more and more on AI features.</p>
+          <p>I enjoy taking AI from an idea to a feature that people can use every day. That means using RAG, embeddings, and vector search (Qdrant) to help an app find the right answer, fast.</p>
+          <p>In my free time I build small projects to keep my skills sharp — a book donation site, a safety app, and a machine learning project.</p>
+        </div>
+        <div>
+          <div class="edu-card">
+            <div class="school">RNS Institute of Technology, Bangalore</div>
+            <div class="deg">B.E. Computer Science — 9.17 CGPA</div>
+            <div class="yrs">Dec 2020 – May 2024</div>
+          </div>
+          <div class="edu-card">
+            <div class="school">Ambika Padavi Poorva Vidyalaya, Puthur</div>
+            <div class="deg">PCM + Computer Science — 97.5%</div>
+            <div class="yrs">May 2018 – Sept 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What I've done</div>
+        <h2>Experience</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-head">
+            <div>
+              <div class="tl-role">Associate Software Engineer</div>
+              <div class="tl-org">A.P. Moller Maersk</div>
+            </div>
+            <div class="tl-date">Jul 2024 – Present</div>
+          </div>
+          <ul>
+            <li>Built an <strong>HR chat assistant</strong> using FastAPI and Google ADK. It answers questions in real time, uses a RAG system for accurate answers, and can create PDFs on request.</li>
+            <li>Built a data pipeline that pulls Workday articles, stores them in Azure, and loads them into Redis so the chat assistant can search them.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-head">
+            <div>
+              <div class="tl-role">Software Engineering Intern</div>
+              <div class="tl-org">A.P. Moller Maersk</div>
+            </div>
+            <div class="tl-date">Jul 2023 – Jun 2024</div>
+          </div>
+          <ul>
+            <li>Built a chatbot with <strong>React, MongoDB, and Qdrant</strong>. Added AI-powered search using LangChain and LlamaIndex, and set up dashboards in Grafana and Power BI.</li>
+            <li>Built a translation tool with <strong>React and Azure</strong> that cut manual work by 80%. Added secure sign-in and automatic data cleanup.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What I work with</div>
+        <h2>Skills</h2>
+      </div>
+      <div class="layers">
+        <div class="layer">
+          <div class="layer-tag">Frontend</div>
+          <h3>What you see</h3>
+          <div class="chip-row">
+            <span class="chip">React</span><span class="chip">Vue</span><span class="chip">Nuxt</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">Backend</div>
+          <h3>What runs it</h3>
+          <div class="chip-row">
+            <span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">.NET</span><span class="chip">Node.js</span>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">AI</div>
+          <h3>What makes it smart</h3>
+          <div class="chip-row">
+            <span class="chip">LLMs</span><span class="chip">RAG</span><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">Qdrant</span><span class="chip">Google ADK</span>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">Cloud &amp; Data</div>
+          <h3>Where it lives</h3>
+          <div class="chip-row">
+            <span class="chip">Azure</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">Monitoring &amp; Observability</div>
+          <h3>How I keep watch</h3>
+          <div class="chip-row">
+            <span class="chip">Grafana</span><span class="chip">Prometheus</span><span class="chip">Azure Monitor</span><span class="chip">Application Insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Things I built on my own</div>
+        <h2>Projects</h2>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-stack">React · MongoDB · Node.js</div>
+          <h3>Women Safety App</h3>
+          <p>Sends emergency alerts and shares live location. Has secure sign-in and a map to track where help is needed.</p>
+        </div>
+        <div class="proj-card">
+          <div class="proj-stack">PHP · MySQL</div>
+          <h3>Book Donation Site</h3>
+          <p>A place to give away old books for free. People can search by category, add books to a cart, and see donor and receiver profiles.</p>
+        </div>
+        <div class="proj-card">
+          <div class="proj-stack">Python</div>
+          <h3>Iris Flower Classifier</h3>
+          <p>A machine learning project that sorts iris flowers into types, using a few different models to compare accuracy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recognitions">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Recognized for</div>
+        <h2>Awards</h2>
+      </div>
+      <div class="rec-grid">
+        <div class="rec-card">
+          <div class="rec-tag">Star Award ×2</div>
+          <p>For stepping in with a fast, important fix right before a project launch, and for helping launch a SharePoint site used by 70,000+ employees.</p>
+        </div>
+        <div class="rec-card">
+          <div class="rec-tag">Spot Award ×2</div>
+          <p>For strong work during my internship on the employee chat assistant, and for fixing a data pipeline that had been broken for a long time, in just 2 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Let's build something useful together.</h2>
+
+      <ul class="contact-list">
+        <li>
+          <a class="icon-btn icon-email" href="mailto:sinchanaac00@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+          <a class="contact-value" href="mailto:sinchanaac00@gmail.com">sinchanaac00@gmail.com</a>
+        </li>
+        <li>
+          <a class="icon-btn icon-call" href="tel:9449787368" aria-label="Call">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          </a>
+          <a class="contact-value" href="tel:9449787368">9449787368</a>
+        </li>
+        <li>
+          <a class="icon-btn icon-whatsapp" href="https://wa.me/918073782054" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.55L3 20l1.05-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 10.5c.3 2.5 2.5 4.7 5 5" stroke-linecap="round"/></svg>
+          </a>
+          <a class="contact-value" href="https://wa.me/918073782054" target="_blank" rel="noopener">8073782054</a>
+        </li>
+        <li>
+          <a class="icon-btn icon-github" href="https://github.com/Sinchana07" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2-.2 4-1 4-4.5a3.5 3.5 0 0 0-1-2.5 3.2 3.2 0 0 0-.1-2.4s-.8-.3-2.9 1a10 10 0 0 0-5 0C7.4 5.8 6.6 6.1 6.6 6.1a3.2 3.2 0 0 0-.1 2.4A3.5 3.5 0 0 0 5.5 11c0 3.4 2 4.3 4 4.5-.3.3-.5.7-.5 1.3V20"/></svg>
+          </a>
+          <a class="contact-value" href="https://github.com/Sinchana07" target="_blank" rel="noopener">github.com/Sinchana07</a>
+        </li>
+        <li>
+          <a class="icon-btn icon-linkedin" href="https://linkedin.com/in/sinchana-a-c" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.5" y1="10.5" x2="7.5" y2="16.5"/><circle cx="7.5" cy="7.2" r="0.6" fill="currentColor" stroke="none"/><path d="M11.5 16.5v-3.5c0-1.4 1-2.3 2.3-2.3 1.2 0 2.2.9 2.2 2.3v3.5"/><line x1="11.5" y1="10.5" x2="11.5" y2="16.5"/></svg>
+          </a>
+          <a class="contact-value" href="https://linkedin.com/in/sinchana-a-c" target="_blank" rel="noopener">linkedin.com/in/sinchana-a-c</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const sections = document.querySelectorAll('main section, footer');
+  const links = document.querySelectorAll('.rail a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        links.forEach(l => l.classList.toggle('active', l.dataset.target === id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
